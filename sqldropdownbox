@@ -1,0 +1,52 @@
+<html>
+<body>
+<h1>View station</h1>
+<?php
+session_start();
+
+$_SESSION['name3'] = $_POST['name3'];
+?>
+<form action="projektsak.php" method="post">
+
+<?php
+$servername = "hem.thg.se";
+$username = "ad63932";
+$password = "jagecool123";
+$dbname = "ad63932";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+     die("Connection failed: " . $conn->connect_error);
+} 
+
+if($_POST["name3"]=="blue")
+{
+$sql = "SELECT * FROM blue";
+}
+if($_POST["name3"]=="green")
+{
+$sql = "SELECT * FROM green";
+}
+if($_POST["name3"]=="red")
+{
+$sql = "SELECT * FROM red";
+}
+$result = $conn->query($sql);
+
+echo '<select name="name2">';
+while ($row = $result->fetch_assoc()) {
+    echo "<option value='" . $row["station"] ."'>" . $row['station'] ."</option>";
+}
+echo '</select>';
+?>
+
+<input type="submit";>
+
+
+</form>
+
+
+</body>
+</html>
